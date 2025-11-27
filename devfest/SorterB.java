@@ -10,14 +10,15 @@ public class SorterB<T extends Comparable<T>> {
     @SuppressWarnings("unchecked")
     private SorterB(List<T> unordered) {
         this.array = unordered.toArray(len ->
-                (T[]) newInstance(array.type(), len)
+            (T[]) newInstance(array.type(), len)
         );
     }
 
-    static <T extends Comparable<T>> List<T> sort(RandomlyFilled<T> input) {
-      	if (input.size() <= 1) {
-			    return input.values();
-		    }
+    public static <T extends Comparable<T>>
+	List<T> sort(RandomlyFilled<T> input) {
+        if (input.size() <= 1) {
+            return input.values();
+        }
         var sorter = new SorterB<>(input.values());
         sorter.qsort(0, input.size() - 1);
         return List.of(sorter.array);
